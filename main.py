@@ -66,7 +66,7 @@ class BlogPost(db.Model):
     date = db.Column(db.String(250), nullable=False)
     body = db.Column(db.Text, nullable=False)
     img_url = db.Column(db.String(250), nullable=False)
-    comments = relationship("Comment", back_populates="parent_post", primaryjoin="{schema_name}.BlogPost.id == Comment.post_id")
+    comments = relationship("Comment", back_populates="parent_post", primaryjoin="BlogPost.id == Comment.post_id")
 
 # db.create_all()
 
@@ -75,6 +75,7 @@ class Comment(db.Model):
     __tablename__ = "comments"
 
     id = db.Column(db.Integer, primary_key=True)
+    author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     comment_author = relationship("User", back_populates="comments")
     post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
