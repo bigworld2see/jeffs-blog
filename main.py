@@ -53,7 +53,7 @@ class User(db.Model, UserMixin):
 
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
-    __table_args__ = {"schema": "schema_name"}
+
     id = db.Column(db.Integer, primary_key=True)
 
     # Create Foreign Key, "users.id" the users refers to the tablename of User.
@@ -73,11 +73,11 @@ class BlogPost(db.Model):
 
 class Comment(db.Model):
     __tablename__ = "comments"
-    __table_args__ = {"schema": "schema_name"}
+
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     comment_author = relationship("User", back_populates="comments")
-    post_id = db.Column(db.Integer, db.ForeignKey("{schema_name}.blog_posts.id"))
+    post_id = db.Column(db.Integer, db.ForeignKey("blog_posts.id"))
     parent_post = relationship("BlogPost", back_populates="comments")
     text = db.Column(db.Text, nullable=False)
 
