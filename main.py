@@ -73,6 +73,7 @@ class BlogPost(db.Model):
 
 class Comment(db.Model):
     __tablename__ = "comments"
+    __table_args__ = {"schema": "schema_name"}
     id = db.Column(db.Integer, primary_key=True)
     author_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     comment_author = relationship("User", back_populates="comments")
