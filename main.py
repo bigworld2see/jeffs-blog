@@ -53,7 +53,7 @@ class User(db.Model, UserMixin):
 
 class BlogPost(db.Model):
     __tablename__ = "blog_posts"
-
+    __table_args__ = {"schema": "schema_name"}
     id = db.Column(db.Integer, primary_key=True)
 
     # Create Foreign Key, "users.id" the users refers to the tablename of User.
